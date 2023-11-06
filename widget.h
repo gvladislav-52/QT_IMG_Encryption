@@ -51,6 +51,14 @@ private:
     QVector<int> binary;
     void charToBinary(char c);
     int plus(rgb_color arr);
+    void Decryption();
+    void Formula(int arr,rgb_color left, rgb_color up, rgb_color rigth, rgb_color down);
+    QVector<int> decryption_vector;
+    int minus(rgb_color arr);
+    QString text_symbol;
+    QVector<int> colory;
+    void Binary_to_Char(QVector<int> vec);
+    QLabel *label;
 public slots:
     void setText();
 };

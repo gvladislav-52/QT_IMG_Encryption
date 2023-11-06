@@ -35,7 +35,7 @@ void Widget::setMatrix()
         }
     }
     lineEdit = new QLineEdit();
-    QLabel *label = new QLabel("Label");
+    label = new QLabel("Enter the symbol:");
     but = new QPushButton("Enter");
     but->setStyleSheet("background-color: gray");
     gridLayout->addWidget(label, 7, 0);
@@ -119,55 +119,56 @@ void Widget::setEncryption()
         {
         case 0:
             if(binary.at(i) == 0)
-                button1[1][1]->setStyleSheet(styleheader::NewButtonStyle(arr[7].r,arr[7].g,arr[7].b-plus(arr[7])));
+                button1[1][1]->setStyleSheet(styleheader::NewButtonStyle(arr[7].r,arr[7].g,minus(arr[7])));
             else
-                button1[1][1]->setStyleSheet(styleheader::NewButtonStyle(arr[7].r,arr[7].g,arr[7].b+plus(arr[7])));
+                button1[1][1]->setStyleSheet(styleheader::NewButtonStyle(arr[7].r,arr[7].g,plus(arr[7])));
             break;
         case 1:
             if(binary.at(i) == 0)
-                button1[1][3]->setStyleSheet(styleheader::NewButtonStyle(arr[9].r,arr[9].g,arr[9].b-plus(arr[9])));
+                button1[1][3]->setStyleSheet(styleheader::NewButtonStyle(arr[9].r,arr[9].g,minus(arr[9])));
             else
-                button1[1][3]->setStyleSheet(styleheader::NewButtonStyle(arr[9].r,arr[9].g,arr[9].b+plus(arr[9])));
+                button1[1][3]->setStyleSheet(styleheader::NewButtonStyle(arr[9].r,arr[9].g,plus(arr[9])));
             break;
         case 2:
             if(binary.at(i) == 0)
-                button1[2][2]->setStyleSheet(styleheader::NewButtonStyle(arr[14].r,arr[14].g,arr[14].b-plus(arr[14])));
+                button1[2][2]->setStyleSheet(styleheader::NewButtonStyle(arr[14].r,arr[14].g,minus(arr[14])));
             else
-                button1[2][2]->setStyleSheet(styleheader::NewButtonStyle(arr[14].r,arr[14].g,arr[14].b+plus(arr[14])));
+                button1[2][2]->setStyleSheet(styleheader::NewButtonStyle(arr[14].r,arr[14].g,plus(arr[14])));
             break;
         case 3:
             if(binary.at(i) == 0)
-                button1[2][4]->setStyleSheet(styleheader::NewButtonStyle(arr[16].r,arr[16].g,arr[16].b-plus(arr[16])));
+                button1[2][4]->setStyleSheet(styleheader::NewButtonStyle(arr[16].r,arr[16].g,minus(arr[16])));
             else
-                button1[2][4]->setStyleSheet(styleheader::NewButtonStyle(arr[16].r,arr[16].g,arr[16].b+plus(arr[16])));
+                button1[2][4]->setStyleSheet(styleheader::NewButtonStyle(arr[16].r,arr[16].g,plus(arr[16])));
             break;
         case 4:
             if(binary.at(i) == 0)
-                button1[3][1]->setStyleSheet(styleheader::NewButtonStyle(arr[19].r,arr[19].g,arr[19].b-plus(arr[19])));
+                button1[3][1]->setStyleSheet(styleheader::NewButtonStyle(arr[19].r,arr[19].g,minus(arr[19])));
             else
-                button1[3][1]->setStyleSheet(styleheader::NewButtonStyle(arr[19].r,arr[19].g,arr[19].b+plus(arr[19])));
+                button1[3][1]->setStyleSheet(styleheader::NewButtonStyle(arr[19].r,arr[19].g,plus(arr[19])));
             break;
         case 5:
             if(binary.at(i) == 0)
-                button1[3][3]->setStyleSheet(styleheader::NewButtonStyle(arr[21].r,arr[21].g,arr[21].b-plus(arr[21])));
+                button1[3][3]->setStyleSheet(styleheader::NewButtonStyle(arr[21].r,arr[21].g,minus(arr[21])));
             else
-                button1[3][3]->setStyleSheet(styleheader::NewButtonStyle(arr[21].r,arr[21].g,arr[21].b+plus(arr[21])));
+                button1[3][3]->setStyleSheet(styleheader::NewButtonStyle(arr[21].r,arr[21].g,plus(arr[21])));
             break;
         case 6:
             if(binary.at(i) == 0)
-                button1[4][2]->setStyleSheet(styleheader::NewButtonStyle(arr[26].r,arr[26].g,arr[26].b-plus(arr[26])));
+                button1[4][2]->setStyleSheet(styleheader::NewButtonStyle(arr[26].r,arr[26].g,minus(arr[26])));
             else
-                button1[4][2]->setStyleSheet(styleheader::NewButtonStyle(arr[26].r,arr[26].g,arr[26].b+plus(arr[26])));
+                button1[4][2]->setStyleSheet(styleheader::NewButtonStyle(arr[26].r,arr[26].g,plus(arr[26])));
             break;
         case 7:
             if(binary.at(i) == 0)
-                button1[4][4]->setStyleSheet(styleheader::NewButtonStyle(arr[28].r,arr[28].g,arr[28].b-plus(arr[28])));
+                button1[4][4]->setStyleSheet(styleheader::NewButtonStyle(arr[28].r,arr[28].g,minus(arr[28])));
             else
-                button1[4][4]->setStyleSheet(styleheader::NewButtonStyle(arr[28].r,arr[28].g,arr[28].b+plus(arr[28])));
+                button1[4][4]->setStyleSheet(styleheader::NewButtonStyle(arr[28].r,arr[28].g,plus(arr[28])));
             break;
         }
 
     }
+    Decryption();
 
 }
 
@@ -190,14 +191,79 @@ void Widget::charToBinary(char c) {
     }
         setEncryption();
     //for(auto c: binary)
-    //    qDebug() << c << " ";
+       //qDebug() << c << " ";
 }
 
 int Widget::plus(rgb_color arr)
+{       int sum = arr.b+(0.15*(0.2989*arr.r+0.58662*arr.g+0.11448*arr.b));
+        colory.push_back(sum);
+        return sum;
+}
+
+int Widget::minus(rgb_color arr)
 {
-        int k = 0.15*(0.2989*arr.r+0.58662*arr.g+0.11448*arr.b);
-        k = k%255;
-        return k;
+        //qDebug() <<  arr.b << "-(0.15*(0.2989*" <<arr.r <<"+0.58662*"<<arr.g <<"+0.11448*" <<arr.b <<"))";
+        int sum = arr.b-(0.15*(0.2989*arr.r+0.58662*arr.g+0.11448*arr.b));
+        //qDebug() << sum;
+        colory.push_back(sum);
+        return sum;
+}
+
+void Widget::Decryption()
+{
+        for(int i = 0; i <colory.size(); i++)
+        {
+        switch(i)
+        {
+        case 0:
+                    Formula(colory[i],arr[6],arr[1],arr[8],arr[13]);
+            break;
+        case 1:
+                    Formula(colory[i],arr[8],arr[3],arr[10],arr[15]);
+            break;
+        case 2:
+                    Formula(colory[i],arr[13],arr[8],arr[15],arr[20]);
+            break;
+        case 3:
+                    Formula(colory[i],arr[15],arr[10],arr[17],arr[22]);
+            break;
+        case 4:
+                    Formula(colory[i],arr[18],arr[13],arr[20],arr[25]);
+            break;
+        case 5:
+                    Formula(colory[i],arr[20],arr[15],arr[22],arr[27]);
+            break;
+        case 6:
+                    Formula(colory[i],arr[25],arr[20],arr[27],arr[32]);
+            break;
+        case 7:
+                    Formula(colory[i],arr[27],arr[22],arr[29],arr[34]);
+            break;
+        }
+        }
+        Binary_to_Char(decryption_vector);
+}
+
+void Widget::Formula(int arr,rgb_color left, rgb_color up, rgb_color right, rgb_color down)
+{
+    int sum = (left.b + up.b + right.b + down.b)/4;
+       // qDebug() << sum << " " << arr;
+    if (sum-arr > 0)
+        decryption_vector.push_back(0);
+    else
+        decryption_vector.push_back(1);
+}
+
+void Widget::Binary_to_Char(QVector<int> vec)
+{
+        char charValue = 0;
+        for (int i = 0; i < 8; i++) {
+            if (vec[i]) {
+                charValue |= (1 << (7 - i));
+            }
+        }
+        QString stringValue(charValue);
+        label->setText("The symbol: "+stringValue);
 }
 
 
