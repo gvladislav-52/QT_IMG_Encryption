@@ -37,7 +37,6 @@ public:
             r = g =b = 0;
         }
     };
-    char textLineEdit;
 private:
     Ui::Widget *ui;
     void setMatrix();
@@ -48,6 +47,10 @@ private:
     void setEncryption();
     QPushButton * but;
     QLineEdit *lineEdit;
+    char textLineEdit;
+    QVector<int> binary;
+    void charToBinary(char c);
+    int plus(rgb_color arr);
 public slots:
     void setText();
 };

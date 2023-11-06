@@ -10,7 +10,6 @@ Widget::Widget(QWidget *parent)
     ui->setupUi(this);
     setStyle();
     setMatrix();
-    setEncryption();
     QObject::connect(but,SIGNAL(clicked()),this,SLOT(setText()));
 }
 
@@ -114,14 +113,61 @@ void Widget::setStyle()
 
 void Widget::setEncryption()
 {
-    button1[1][1]->setStyleSheet(styleheader::button(arr[7].r,arr[7].g,0.15*(0.2989*arr[7].r+0.58662*arr[7].g+0.11448*arr[7].b)));
-    button1[1][3]->setStyleSheet(styleheader::button(206, 203, 240));
-    button1[2][2]->setStyleSheet(styleheader::button(202, 199, 240));
-    button1[2][4]->setStyleSheet(styleheader::button(224, 222, 191));
-    button1[3][1]->setStyleSheet(styleheader::button(200, 197, 244));
-    button1[3][3]->setStyleSheet(styleheader::button(203, 200, 176));
-    button1[4][2]->setStyleSheet(styleheader::button(194, 191, 173));
-    button1[4][4]->setStyleSheet(styleheader::button(229, 227, 2));
+    for(int i = 0; i < binary.size(); i++)
+    {
+        switch(i)
+        {
+        case 0:
+            if(binary.at(i) == 0)
+                button1[1][1]->setStyleSheet(styleheader::NewButtonStyle(arr[7].r,arr[7].g,arr[7].b-plus(arr[7])));
+            else
+                button1[1][1]->setStyleSheet(styleheader::NewButtonStyle(arr[7].r,arr[7].g,arr[7].b+plus(arr[7])));
+            break;
+        case 1:
+            if(binary.at(i) == 0)
+                button1[1][3]->setStyleSheet(styleheader::NewButtonStyle(arr[9].r,arr[9].g,arr[9].b-plus(arr[9])));
+            else
+                button1[1][3]->setStyleSheet(styleheader::NewButtonStyle(arr[9].r,arr[9].g,arr[9].b+plus(arr[9])));
+            break;
+        case 2:
+            if(binary.at(i) == 0)
+                button1[2][2]->setStyleSheet(styleheader::NewButtonStyle(arr[14].r,arr[14].g,arr[14].b-plus(arr[14])));
+            else
+                button1[2][2]->setStyleSheet(styleheader::NewButtonStyle(arr[14].r,arr[14].g,arr[14].b+plus(arr[14])));
+            break;
+        case 3:
+            if(binary.at(i) == 0)
+                button1[2][4]->setStyleSheet(styleheader::NewButtonStyle(arr[16].r,arr[16].g,arr[16].b-plus(arr[16])));
+            else
+                button1[2][4]->setStyleSheet(styleheader::NewButtonStyle(arr[16].r,arr[16].g,arr[16].b+plus(arr[16])));
+            break;
+        case 4:
+            if(binary.at(i) == 0)
+                button1[3][1]->setStyleSheet(styleheader::NewButtonStyle(arr[19].r,arr[19].g,arr[19].b-plus(arr[19])));
+            else
+                button1[3][1]->setStyleSheet(styleheader::NewButtonStyle(arr[19].r,arr[19].g,arr[19].b+plus(arr[19])));
+            break;
+        case 5:
+            if(binary.at(i) == 0)
+                button1[3][3]->setStyleSheet(styleheader::NewButtonStyle(arr[21].r,arr[21].g,arr[21].b-plus(arr[21])));
+            else
+                button1[3][3]->setStyleSheet(styleheader::NewButtonStyle(arr[21].r,arr[21].g,arr[21].b+plus(arr[21])));
+            break;
+        case 6:
+            if(binary.at(i) == 0)
+                button1[4][2]->setStyleSheet(styleheader::NewButtonStyle(arr[26].r,arr[26].g,arr[26].b-plus(arr[26])));
+            else
+                button1[4][2]->setStyleSheet(styleheader::NewButtonStyle(arr[26].r,arr[26].g,arr[26].b+plus(arr[26])));
+            break;
+        case 7:
+            if(binary.at(i) == 0)
+                button1[4][4]->setStyleSheet(styleheader::NewButtonStyle(arr[28].r,arr[28].g,arr[28].b-plus(arr[28])));
+            else
+                button1[4][4]->setStyleSheet(styleheader::NewButtonStyle(arr[28].r,arr[28].g,arr[28].b+plus(arr[28])));
+            break;
+        }
+
+    }
 
 }
 
@@ -130,8 +176,30 @@ void Widget::setText()
     QString textBuffer;
     textBuffer = lineEdit->text();
     textLineEdit = textBuffer[0].toLatin1();
-    //qDebug() << textLineEdit;
+    qDebug() << textLineEdit;
+    charToBinary(textLineEdit);
 }
+
+void Widget::charToBinary(char c) {
+    while (c > 0) {
+        binary.push_front(c % 2); // добавляем бит в начало вектора
+        c /= 2;
+    }
+    while (binary.size() < 8) {
+        binary.push_front(0); // дополняем вектор нулями до 8 бит
+    }
+        setEncryption();
+    //for(auto c: binary)
+    //    qDebug() << c << " ";
+}
+
+int Widget::plus(rgb_color arr)
+{
+        int k = 0.15*(0.2989*arr.r+0.58662*arr.g+0.11448*arr.b);
+        k = k%255;
+        return k;
+}
+
 
 
 
